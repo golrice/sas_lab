@@ -27,8 +27,9 @@ omega = np.fft.fftfreq(len(samples), d=delta_t) * 2 * np.pi
 delta_omega = omega[1] - omega[0]
 omega_shifted = np.fft.fftshift(omega)
 
+# 假设一个系统的系统函数是X_jw_shifted
 # 反变换
-x_t = np.fft.ifft(X_jw_shifted) * len(omega) * delta_omega / (2 * np.pi)
+x_t = np.fft.ifft(X_jw_shifted * X_jw_shifted) * len(omega) * delta_omega / (2 * np.pi)
 x_t = np.real(x_t)
 t = np.fft.fftfreq(len(omega), d=delta_omega / (2 * np.pi))
 
@@ -45,7 +46,7 @@ plt.plot(t, x_t)
 plt.xlabel("Time (s)")
 plt.ylabel("Amplitude")
 
-plt.subplot(2, 2, 4)
+plt.subplot(2, 1, 2)
 plt.plot(omega_shifted, np.abs(X_jw_shifted))
 plt.xlabel("Frequency (Hz)")
 plt.ylabel("Magnitude")
@@ -55,7 +56,6 @@ plt.close()
 
 # 导出音频
 x_t_bytes = x_t.astype(np.int16)
-print("type of x_t_bytes:", type(x_t_bytes))
 # 加载音频数据为 AudioSegment 对象
 audio = AudioSegment(x_t_bytes.tobytes(), frame_rate=audio.frame_rate, sample_width=2, channels=2)
 

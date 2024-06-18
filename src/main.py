@@ -5,19 +5,14 @@ import os
 
 # constants
 # eigenfunction 表示 频率响应
-eigenfunction = "resources/eigenfunction.wav"
+eigenfunction_path = os.path.join(os.path.dirname(__file__), "..", "resources", "eigenfunction.wav")
 # vocal 表示 人声信息
-vocal = "resources/vocal.wav"
-save_graph_path = "resources/graph.png"
-vocal_pure = "resources/vocal_pure.wav"
-if os.name == 'nt':
-    eigenfunction = eigenfunction.replace('/', '\\\\')
-    vocal = vocal.replace('/', '\\\\')
-    save_graph_path = save_graph_path.replace('/', '\\\\')
-    vocal_pure = vocal_pure.replace('/', '\\\\')
+vocal_path = os.path.join(os.path.dirname(__file__), "..", "resources", "vocal.wav")
+save_graph_path = os.path.join(os.path.dirname(__file__), "..", "resources", "graph.png")
+vocal_pure_path = os.path.join(os.path.dirname(__file__), "..", "resources", "vocal_pure.wav")
 
 # load audio and calculate JW spectrum
-eigenfunction_audio = AudioSegment.from_wav(eigenfunction)
+eigenfunction_audio = AudioSegment.from_wav(eigenfunction_path)
 eigenfunction_array = np.array(eigenfunction_audio.get_array_of_samples())
 eigenfunction_freq = eigenfunction_audio.frame_rate
 eigenfunction_time = np.linspace(0, len(eigenfunction_array) / eigenfunction_freq, len(eigenfunction_array))
@@ -28,7 +23,7 @@ eigenfunction_jw_shifted = np.fft.fftshift(eigenfunction_jw) * eigenfunction_del
 
 eigenfunction_omega = np.fft.fftfreq(len(eigenfunction_array), d=eigenfunction_delta_t) * 2 * np.pi
 
-vocal_audio = AudioSegment.from_wav(vocal)
+vocal_audio = AudioSegment.from_wav(vocal_path)
 vocal_array = np.array(vocal_audio.get_array_of_samples())
 vocal_freq = vocal_audio.frame_rate
 vocal_time = np.linspace(0, len(vocal_array) / vocal_freq, len(vocal_array))

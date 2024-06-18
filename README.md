@@ -46,3 +46,22 @@
 - `tests`: 存放项目测试用例。
 - `README.md`: 项目说明文件。
 - `LICENSE`: 项目许可证文件。
+
+### bin目录
+
+- `sound2matrix.py`: 将声音信号转换成矩阵形式存储，不需要在意
+- `trans_format.py`: 转换存储声音的格式，不需要在意
+
+### requirements目录
+
+- `requirements.txt`: 项目所需的依赖库列表。
+
+### src目录
+
+- `main.py`: 主程序，用于处理音频文件。
+- `example`: 课程提供的示例代码。
+
+### resouces目录
+
+- `eigenfunction`: 存放特征的信号
+- `vocal`: 存放人声的声音文件
